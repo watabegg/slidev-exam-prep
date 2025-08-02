@@ -1,0 +1,40 @@
+{
+  "name": "slidev-theme-exam-prep",
+  "version": "0.0.0",
+  "type": "module",
+  "description": "A Slidev theme designed for educational presentations with focus on usability and interactivity",
+  "keywords": [
+    "slidev-theme",
+    "slidev",
+    "education",
+    "exam",
+    "teaching"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "build": "slidev build example.md",
+    "dev": "slidev example.md --open",
+    "export": "slidev export example.md",
+    "screenshot": "slidev export example.md --format png"
+  },
+  "dependencies": {
+    "@slidev/types": "^52.1.0"
+  },
+  "devDependencies": {
+    "@slidev/cli": "^52.1.0"
+  },
+  "//": "Learn more: https://sli.dev/guide/write-theme.html",
+  "slidev": {
+    "colorSchema": "light",
+    "defaults": {
+      "background": "#FFFFFF",
+      "fonts": {
+        "sans": "M PLUS 2",
+        "mono": "Fira Code"
+      },
+      "lineNumbers": false
+    }
+  }
+}

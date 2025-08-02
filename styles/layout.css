@@ -1,0 +1,111 @@
+/* Layout-specific styles */
+
+/* Cover layout */
+.slidev-layout.cover {
+  @apply h-full grid place-items-center text-center relative;
+  background: #FFFFFF;
+  
+  /* Decorative curved green overlay */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #2E7D32 0%, #388E3C 30%, #4CAF50 60%, #66BB6A 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 60%, 80% 70%, 60% 75%, 40% 78%, 20% 80%, 0 85%);
+    pointer-events: none;
+  }
+
+  h1 {
+    @apply text-7xl leading-tight mb-6;
+    color: white;
+    position: static;
+    border: none;
+    padding: 0;
+    margin-bottom: 1.5rem;
+    z-index: 10;
+    position: relative;
+  }
+
+  h2 {
+    @apply text-3xl opacity-90 mb-8;
+    color: white;
+    z-index: 10;
+    position: relative;
+  }
+
+  .author {
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+    color: #2E7D32;
+    font-weight: 600;
+    font-size: 1.2rem;
+    z-index: 10;
+  }
+}
+
+/* Intro layout */
+.slidev-layout.intro {
+  @apply h-full grid place-items-center text-center;
+  
+  h1 {
+    @apply text-6xl leading-20 mb-6;
+    position: static;
+    border: none;
+  }
+
+  h1 + p {
+    @apply -mt-2 opacity-70 mb-4 text-xl;
+  }
+
+  p + h2,
+  ul + h2,
+  table + h2 {
+    @apply mt-10;
+  }
+}
+
+/* Two columns layout */
+.slidev-layout.two-cols {
+  .slidev-grid-container {
+    @apply grid grid-cols-2 gap-8 h-full;
+  }
+  
+  .col-left, .col-right {
+    @apply flex flex-col justify-start;
+  }
+}
+
+/* Answer layout styles are now handled by the QuestionList component */
+
+/* Image layout */
+.slidev-layout.image {
+  position: relative;
+  padding: 0;
+  
+  .background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+  
+  .content {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    padding: 2rem;
+  }
+  
+  h1 {
+    position: relative;
+    background-color: rgba(255, 255, 255, 0); 
+  }
+
+}
