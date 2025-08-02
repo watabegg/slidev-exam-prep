@@ -1,8 +1,8 @@
 {
   "name": "slidev-theme-exam-prep",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
-  "description": "A Slidev theme designed for educational presentations with focus on usability and interactivity",
+  "description": "watabeggが塾の集団授業で使うためのSlidevテーマ",
   "keywords": [
     "slidev-theme",
     "slidev",

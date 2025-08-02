@@ -4,19 +4,7 @@
 .slidev-layout.cover {
   @apply h-full grid place-items-center text-center relative;
   background: #FFFFFF;
-  
-  /* Decorative curved green overlay */
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, #2E7D32 0%, #388E3C 30%, #4CAF50 60%, #66BB6A 100%);
-    clip-path: polygon(0 0, 100% 0, 100% 60%, 80% 70%, 60% 75%, 40% 78%, 20% 80%, 0 85%);
-    pointer-events: none;
-  }
+
 
   h1 {
     @apply text-7xl leading-tight mb-6;
