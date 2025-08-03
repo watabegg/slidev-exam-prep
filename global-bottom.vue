@@ -1,6 +1,6 @@
 <template>
   <footer 
-    v-if="$nav.currentLayout !== 'cover'"
+    v-if="$nav.currentLayout !== 'cover' && $nav.currentLayout !== 'image'"
     class="exam-prep-footer"
   >
     <div class="footer-left">
