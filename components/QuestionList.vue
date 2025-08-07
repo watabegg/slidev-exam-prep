@@ -3,17 +3,16 @@
     <div v-for="(item, index) in items" :key="index" class="question-item">
       <div class="item-content">
         <span class="item-label" v-html="getLabel(index)"></span>
-        <span class="item-text">
+        <span v-if="getItemText(item)" class="item-text">
           <component :is="renderMarkdown(getItemText(item))" />
         </span>
       </div>
-      <div v-if="hasSubItems(item)" class="sub-list">
+      <div v-if="hasSubItems(item)" class="sub-list" :style="{ marginTop: getItemText(item) ? '1rem' : '0' }">
         <QuestionList
           :items="getSubItems(item)"
           :styles="styles"
           :level="currentLevel + 1"
           :start="Array.isArray(start) ? start : []"
-          :labels="Array.isArray(labels) ? labels : []"
         />
       </div>
     </div>
@@ -22,25 +21,23 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { marked } from 'marked';
+import { renderMarkdown } from '../utils/render';
 
 const props = withDefaults(defineProps<{
   items: (string | Record<string, any>)[];
   styles?: string[];
   level?: number;
   start?: (number | string)[];
-  labels?: string[];
 }>(), {
   styles: () => ['decimal-circle', 'katakana-paren', 'lower-alpha-paren', 'decimal-dot'],
   level: 0,
   start: () => [],
-  labels: () => [],
 });
 
 const currentLevel = computed(() => props.level ?? 0);
 
 const getItemText = (item: string | Record<string, any>): string => 
-  typeof item === 'string' ? item : item.text;
+  (typeof item === 'string' ? item : item.text) || '';
 
 const hasSubItems = (item: string | Record<string, any>): boolean => 
   typeof item === 'object' && Array.isArray(item.items);
@@ -48,14 +45,11 @@ const hasSubItems = (item: string | Record<string, any>): boolean =>
 const getSubItems = (item: string | Record<string, any>): any[] => 
   (typeof item === 'object' && Array.isArray(item.items)) ? item.items : [];
 
-const renderMarkdown = (text: string) => ({
-  template: `<div class="inline-block">${marked.parse(text)}</div>`
-});
-
 const getLabel = (index: number): string => {
-  // 1. Custom labels override everything
-  if (props.labels && props.labels[index]) {
-    return props.labels[index];
+  const item = props.items[index];
+  // 1. Custom item-specific labels override everything
+  if (typeof item === 'object' && typeof item.label === 'string') {
+    return item.label;
   }
 
   const style = props.styles[currentLevel.value] || 'decimal-dot';
@@ -78,6 +72,9 @@ const getLabel = (index: number): string => {
     case 'loweralpha':
       counter = String.fromCharCode('a'.charCodeAt(0) + currentIndex); break;
     case 'decimal':
+      counter = (currentIndex + 1).toString(); break;
+    case 'none':
+      return ''; // No label
     default:
       counter = (currentIndex + 1).toString();
   }
@@ -97,6 +94,7 @@ const getLabel = (index: number): string => {
     case 'big-q':
       return `大問${counter}`;
     case 'none':
+      return '';
     default:
       return counter;
   }

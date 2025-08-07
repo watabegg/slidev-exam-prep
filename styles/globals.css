@@ -94,13 +94,12 @@
   }
 }
 
-/* Global footer for all layouts except cover */
-.slidev-layout:not(.cover) {
+.slidev-layout:not(.cover, .image) {
   position: relative;
-  padding-bottom: 4rem; /* Space for footer */
+  padding-bottom: 4rem; 
 }
 
-.slidev-layout:not(.cover)::after {
+.slidev-layout:not(.cover, .image)::after {
   content: '';
   position: absolute;
   bottom: 0;
@@ -112,7 +111,7 @@
 }
 
 /* Global header positioning for non-cover layouts */
-.slidev-layout:not(.cover) h1:first-child {
+.slidev-layout:not(.cover, .image) h1:first-child {
   position: fixed;
   top: 2rem;
   left: 2rem;

@@ -64,8 +64,8 @@ console.log(result);
     {
       text: 'これは2番目の質問で、子要素を持っています。',
       items: [
-        'サブ項目A',
-        'サブ項目B',
+        {label: 'A', text: 'aaaa'},
+        {label: 'B', text: 'サブ項目B'},
         {
           text: 'さらにネストした項目',
           items: [
@@ -78,6 +78,35 @@ console.log(result);
     'これは3番目の質問です。'
   ]"
   :styles="['decimal-circle', 'katakana-paren', 'loweralpha-dot']"
+/>
+
+---
+
+# 機能修正のテスト
+
+<QuestionList
+  :items="[
+    {
+      label: '問1',
+      items: [
+        '最初のサブ項目です。',
+        { text: 'ラベルをカスタマイズした項目', label: '★' },
+        '3つ目のサブ項目。'
+      ]
+    },
+    {
+      text: 'これは2番目の質問で、子要素を持っています。',
+      items: [
+        'サブ項目A',
+        'サブ項目B',
+      ]
+    },
+    {
+      label: '問3',
+      text: 'ラベルとテキストが両方ある場合'
+    }
+  ]"
+  :styles="['decimal-q', 'katakana-paren']"
 />
 
 ---

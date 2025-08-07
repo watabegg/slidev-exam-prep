@@ -40,8 +40,8 @@ const computedStyles = computed(() => ({
 }))
 
 const computedClasses = computed(() => {
-  const classes = []
-  
+  const classes: string[] = []
+
   if (props.textBg) {
     classes.push(`bg-${props.textBg}`)
   }
@@ -62,44 +62,48 @@ const computedClasses = computed(() => {
     border-radius: 0.5rem;
   }
   
-  .bg-green-500 {
+  .bg-green {
     background: rgba(76, 175, 80);
     color: white;
   }
 
-  .bg-blue-500 {
+  .bg-blue {
     background: rgba(33, 150, 243);
     color: white;
   }
 
-  .bg-red-500 {
+  .bg-red {
     background: rgba(244, 67, 54);
     color: white;
   }
 
-  .bg-yellow-500 {
+  .bg-yellow {
     background: rgba(255, 193, 7);
     color: #333;
   }
 
+  .bg-white {
+    background: rgba(255, 255, 255);
+  }
+
 /* Text color variants */
-.text-blue-500 {
+.text-blue {
   color: #3b82f6 !important;
 }
 
-.text-green-500 {
+.text-green {
   color: #10b981 !important;
 }
 
-.text-red-500 {
+.text-red {
   color: #ef4444 !important;
 }
 
-.text-purple-500 {
+.text-purple {
   color: #8b5cf6 !important;
 }
 
-.text-orange-500 {
+.text-orange {
   color: #f97316 !important;
 }
 </style>
