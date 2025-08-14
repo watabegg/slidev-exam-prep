@@ -1,6 +1,6 @@
 {
   "name": "slidev-theme-exam-prep",
-  "version": "1.0.5",
+  "version": "1.1.0",
   "type": "module",
   "description": "watabeggが塾の集団授業で使うためのSlidevテーマ",
   "keywords": [
@@ -23,7 +23,8 @@
     "@slidev/types": "^52.1.0"
   },
   "devDependencies": {
-    "@slidev/cli": "^52.1.0"
+    "@slidev/cli": "^52.1.0",
+    "playwright-chromium": "^1.54.2"
   },
   "//": "Learn more: https://sli.dev/guide/write-theme.html",
   "slidev": {

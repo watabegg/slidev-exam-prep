@@ -1,30 +1,29 @@
 ---
 theme: ./
-title: 試験対策テーマ デモ
-subtitle: slidev-theme-exam-prep
-author: author
+title: Theme Demo
+subtitle: slidevのテーマ exam-prepの紹介
+author: watabegg
 date: '2025/08/03'
 ---
 
 ---
 
-# 基本機能のテスト
+# 基本機能とスタイル
 
-このスライドでは基本的な機能をテストします。
+このスライドではテーマの基本スタイルをテストします。
 
-- **太字テキスト** と *斜体テキスト*
-- リスト項目1
-- リスト項目2
-  - ネストされたリスト
-  - もう一つのアイテム
+- **太字** / *斜体* / `code`
+- 入れ子リスト
+  - 第二階層
+  - もう一つ
 
-## コードブロック
-
-```typescript
+```ts
 function hello(name: string) {
-  console.log(`Hello, ${name}!`);
+  console.log(`Hello, ${name}`)
 }
 ```
+
+> ヒント: 最初の h1 は固定ヘッダになります。
 
 ---
 layout: two-cols
@@ -32,187 +31,103 @@ title: 2カラムレイアウト
 ---
 
 ::left::
-
-## 左側のコンテンツ
-
+### 左側
 - ポイント1
 - ポイント2
 - ポイント3
 
-重要な情報をここに配置できます。
+固定ヘッダとフッターの余白を意識した構造。
 
 ::right::
-
-## 右側のコンテンツ
-
-```javascript
-// サンプルコード
-const data = [1, 2, 3, 4, 5];
-const result = data.map(x => x * 2);
-console.log(result);
+### 右側
+```js
+const nums = [1,2,3]
+const doubled = nums.map(n=>n*2)
+console.log(doubled)
 ```
-
-図表や追加説明をここに。
+図表 / コード / 説明などを分割表示。
 
 ---
 
-# 新しいQuestionListのテスト
+# QuestionList 基本
 
 <QuestionList
   :items="[
-    'これは最初の質問です。Markdownで**太字**も使えます。',
+    '最初の項目 **Markdown OK**',
     {
-      text: 'これは2番目の質問で、子要素を持っています。',
+      text: '2番目 (子を含む)',
       items: [
-        {label: 'A', text: 'aaaa'},
-        {label: 'B', text: 'サブ項目B'},
-        {
-          text: 'さらにネストした項目',
-          items: [
-            '詳細その1',
-            '詳細その2',
-          ]
-        }
+        { label: 'A', text: 'A の内容'},
+        { label: 'B', text: 'B の内容'},
+        { text: 'さらにネスト', items: ['深い1', '深い2'] }
       ]
     },
-    'これは3番目の質問です。'
+    { label: '★', text: 'カスタムラベル' }
   ]"
-  :styles="['decimal-circle', 'katakana-paren', 'loweralpha-dot']"
+  :styles="['decimal-circle','katakana-paren','loweralpha-dot']"
 />
 
 ---
 
-# 機能修正のテスト
+# QuestionList start 指定
 
 <QuestionList
   :items="[
-    {
-      label: '問1',
-      items: [
-        '最初のサブ項目です。',
-        { text: 'ラベルをカスタマイズした項目', label: '★' },
-        '3つ目のサブ項目。'
-      ]
-    },
-    {
-      text: 'これは2番目の質問で、子要素を持っています。',
-      items: [
-        'サブ項目A',
-        'サブ項目B',
-      ]
-    },
-    {
-      label: '問3',
-      text: 'ラベルとテキストが両方ある場合'
-    }
+    { text: '大問1: サブ', items: ['1つ目','2つ目'] },
+    { text: '大問2: サブ', items: ['A','B','C'] }
   ]"
-  :styles="['decimal-q', 'katakana-paren']"
+  :styles="['decimal-q','hiragana-paren']"
+  :start="[1,1]"
 />
-
----
-
-# 解答レイアウト（カタカナ）
-
-<QuestionList
-  :items="[
-    'アの解答',
-    'イの解答',
-    'ウの解答',
-    'エの解答'
-  ]"
-  :styles="['katakana']"
-/>
----
-
-# 解答レイアウト（カスタム）
-
-<QuestionList
-  :items="[
-    'アの解答',
-    'イの解答',
-    'ウの解答',
-    'エの解答'
-  ]"
-  :styles="['custom']"
-/>
-
----
-
-# RevealCardのテスト
-
-## v-clickとの組み合わせ
-
-<span v-click="1">1回目のEnterで表示</span>から始まります。
-
-<span v-click="2">2回目のEnterで表示</span>
-
-<span v-click="3" color="green-500">3回目のEnterで表示（緑）</span>
 
 ---
 layout: image
-image: 'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2370&q=80'
+image: 'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=2370&q=80'
 ---
 
-<TextBox :x="100" :y="200" :width="400" v-click="1">
-これが **1番目** にEnterで表示されるテキストです。
-背景画像の上に配置されています。
-</TextBox>
-
-<TextBox :x="200" :y="400" :width="350" textBg="green-500" v-click="2">
-これが **2番目**。背景色付きです。
-</TextBox>
-
-<TextBox :x="500" :y="150" :width="300" color="blue-500">
-これは最初から表示されています。
-青い文字色です。
-</TextBox>
-
-<TextBox :x="50" :y="20" :width="400" textBg="yellow-500" v-click="3">
-最後に表示される黄色い背景のテキストボックスです。
-</TextBox>
+<TextBox :x="80" :y="140" :width="360" v-click="1">**1番目** に表示される注釈。</TextBox>
+<TextBox :x="200" :y="380" :width="340" textBg="green" v-click="2">背景色付き 2番目。</TextBox>
+<TextBox :x="500" :y="120" :width="300" color="blue">常時表示 (青文字)。</TextBox>
+<TextBox :x="40" :y="20" :width="420" textBg="yellow" v-click="3">最後に表示される黄色背景。</TextBox>
 
 ---
 
-# ハイライト機能
+# ユーティリティ
 
-普通のテキストと<span class="text-highlight">ハイライトされたテキスト</span>があります。
+普通のテキストと <span class="text-highlight">ハイライト</span>。
 
-## カード風スタイル
-
-<div class="card mt-8">
-  <h3>重要なお知らせ</h3>
-  <p>このカードスタイルは重要な情報を目立たせるのに使えます。</p>
-  <p><span v-click="1">隠された情報もカード内で使用可能</span></p>
+<div class="card mt-8" v-click="1">
+  <h3>カードスタイル</h3>
+  <p>重要事項をまとめるのに便利です。</p>
 </div>
 
 ---
 
-# テーマの特徴まとめ
+# フッターとショートカット
 
-## ✅ 実装済み機能
+このテーマでは Enter / Backspace キーで進行を制御できます。
 
-- 🎨 教育に特化したデザイン
-- 📱 レスポンシブレイアウト
-- 🔤 M PLUS 2フォント
-- 📄 自動フッター（日付・ページ番号）
-- ⌨️ Enter/Backspaceキー操作
-- 🎯 複数のレイアウト（cover, two-cols, answer, image）
-- 📍 TextBoxコンポーネント
-
-## 🚀 今後の展開
-
-このテーマを使って効果的な授業資料を作成してください！
+- Enter: 次のスライド / v-click
+- Backspace: 前へ戻る
+- フッター: (cover / image 以外) 日付 + ページ番号
 
 ---
 
-# ありがとうございました
+# まとめ
+
+- レイアウト: cover / two-cols / image
+- コンポーネント: QuestionList / TextBox
+- 自動フッター & 固定ヘッダ
+- ラベルスタイル多彩 & Markdown 埋め込み
+
+ご利用ありがとうございます 🎓
+
+---
+
+# 終了
 
 <div class="text-center mt-16">
   <div class="text-4xl mb-4">🎓</div>
-  <div class="text-xl opacity-80">
-    slidev-theme-exam-prep
-  </div>
-  <div class="text-lg opacity-60 mt-4">
-    教育現場での使いやすさを追求したSlidevテーマ
-  </div>
+  <div class="text-xl opacity-80">slidev-theme-exam-prep</div>
+  <div class="text-lg opacity-60 mt-4">教育現場向け Slidev テーマ</div>
 </div>

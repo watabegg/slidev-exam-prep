@@ -4,6 +4,9 @@
       <h1 v-if="$frontmatter.title">{{ $frontmatter.title }}</h1>
       <h2 v-if="$frontmatter.subtitle">{{ $frontmatter.subtitle }}</h2>
     </div>
+    <div v-if="$frontmatter.date" class="date">
+      {{ $frontmatter.date }}
+    </div>
     <div v-if="$frontmatter.author" class="author">
       {{ $frontmatter.author }}
     </div>

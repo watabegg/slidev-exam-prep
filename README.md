@@ -2,206 +2,129 @@
 
 [![NPM version](https://img.shields.io/npm/v/slidev-theme-exam-prep?color=3AB9D4&label=)](https://www.npmjs.com/package/slidev-theme-exam-prep)
 
-A Slidev theme designed for educational presentations with focus on usability and interactivity in classroom settings.
+English README (Japanese version: see `README.ja.md`).
+
+## Overview
+An education-focused Slidev theme for exam preparation & classroom lessons, optimized for Japanese typography, high readability, structured question hierarchies, and keyboard-centric navigation. Originally built for personal teaching use.
 
 ## Features
+- Minimal classroom-oriented design
+- Japanese font (M PLUS 2) + monospace Fira Code
+- Automatic footer (date + current/total page) except on `cover` / `image`
+- Shortcuts: Enter (next) / Backspace (previous)
+- Layouts: `cover`, `two-cols`, `image`
+- Components: `QuestionList`, `TextBox`
+- Multi-level labels: circled numbers / Katakana / Hiragana / kanji numerals (1–19) / alphabet / custom
+- Utility classes: `.text-highlight`, `.card`
+- Shiki code themes: `vitesse-light` / `vitesse-dark`
 
-- 🎓 **Education-focused design** - Clean, professional appearance suitable for classrooms
-- 📱 **Responsive layouts** - Works well on various screen sizes
-- 🔤 **Japanese-friendly fonts** - Uses M PLUS 2 for excellent Japanese text rendering
-- 📄 **Auto-generated footers** - Date and page numbers on every slide (except cover)
-- ⌨️ **Intuitive navigation** - Enter to advance, Backspace to go back
-- 🎯 **Multiple specialized layouts** - Cover, two-column, answer, and image layouts
-- 🔍 **RevealCard component** - Interactive hidden text for quizzes and memory exercises
-- 📍 **TextBox component** - Positioned text boxes for image annotations
-
-## Installation
-
-Add the following frontmatter to your `slides.md`. Start Slidev then it will prompt you to install the theme automatically.
-
+## Install
+Add to your slide frontmatter:
 ```yaml
 ---
-theme: exam-prep
+theme: slidev-theme-exam-prep
+---
+```
+Local development (cloned repository):
+```yaml
+---
+theme: ./
 ---
 ```
 
-Learn more about [how to use a theme](https://sli.dev/guide/theme-addon#use-theme).
+## Frontmatter Example
+```yaml
+title: Class Title
+subtitle: Subtitle
+author: Instructor Name
+date: '2025/08/03'
+```
+
+![Frontmatter Example](./example/1.png)
 
 ## Layouts
+| Name | Purpose | Notes |
+|------|---------|-------|
+| cover | Title slide | Gradient wave + title/subtitle/author |
+| two-cols | Two columns | Slots: `::left::` / `::right::` |
+| image | Background image | Use `image:` + absolutely placed `TextBox` |
 
-### `cover`
-- **Purpose:** Title page for presentations
-- **Features:** Displays title, subtitle, and author with a green gradient background
-
-### `two-cols`
-- **Purpose:** Split content into two columns
-- **Usage:**
+### two-cols Example
 ```markdown
 ---
 layout: two-cols
 ---
-
 ::left::
-Left column content
-
+Left
 ::right::
-Right column content
+Right
 ```
 
-### `answer`
-- **Purpose:** Display answers in hierarchical lists
-- **Features:** Multiple numbering styles (circle, katakana, roman, custom)
-- **Usage:**
-```yaml
----
-layout: answer
-answer-style: circle  # or katakana, roman, custom
----
-```
+![two-cols Example](./example/3.png)
 
-### `image`
-- **Purpose:** Place text boxes over background images
-- **Usage:** Use with TextBox component for positioned overlays
+### image Example
+```markdown
+---
+layout: image
+image: /path/to/bg.jpg
+---
+<TextBox :x="120" :y="160" :width="360">Note</TextBox>
+```
 
 ## Components
-
-### `RevealCard`
-Interactive component for hiding/revealing text content.
-
-```html
-<!-- Basic usage -->
-<RevealCard>Hidden content</RevealCard>
-
-<!-- With custom color -->
-<RevealCard color="blue-500">Blue hidden text</RevealCard>
-
-<!-- With v-click integration -->
-<RevealCard v-click="2">Revealed on second click</RevealCard>
-
-<!-- Disable bold text -->
-<RevealCard :bold="false">Normal weight text</RevealCard>
+### QuestionList
+Recursive nested lists (questions / answers) with per-level styles and Markdown rendering.
+```vue
+<QuestionList
+  :items="['First **OK**', { text: 'Second', items: ['Child A','Child B'] }]"
+  :styles="['decimal-circle','katakana-paren','loweralpha-dot']"
+  :start="[1,1,'c']"
+/>
 ```
+Counter types: `decimal | hiragana | katakana | kanji | upperalpha | loweralpha | none`  
+Decorators: `circle | square | paren | dot | q | big-q | none`  
+If an item includes a `label`, it overrides the computed label.
 
-**Props:**
-- `color` - UnoCSS color class for hidden state
-- `bold` - Boolean to control bold styling (default: true)
-- `v-click` - Integration with Slidev's click system
+![QuestionList Example](./example/4.png)
 
-### `TextBox`
-Positioned text container for image layouts.
-
-```html
-<TextBox :x="100" :y="200" :width="400" v-click="1">
-  Your content here
-</TextBox>
-
-<TextBox :x="200" :y="350" :width="300" textBg="green-500" vClick="2">
-  Text with background color
-</TextBox>
+### TextBox
+Absolutely positioned overlay (useful on `image` layout or for callouts).
+```vue
+<TextBox :x="100" :y="220" :width="400" textBg="green" v-click="1">Memo</TextBox>
 ```
+Props: `x`, `y`, `width`, `height`, `textBg`, `color`, `vClick`
 
-**Props:**
-- `x`, `y` - Position in pixels
-- `width`, `height` - Dimensions in pixels
-- `color` - UnoCSS text color class
-- `textBg` - UnoCSS background color class
-- `vClick` - Display order for v-click animations
+## Footer & Shortcuts
+- Footer (except on cover / image): displays `date` + current / total pages.
+- Enter: next fragment or slide.
+- Backspace: previous fragment or slide.
 
-## Theme Configuration
+## Utility Classes
+- `.text-highlight` inline / line-marker style highlight
+- `.card` rounded bordered container with padding
 
-The theme supports the following frontmatter options:
-
-```yaml
----
-theme: exam-prep
-title: Your Presentation Title
-subtitle: Optional subtitle
-author: Your Name
-date: '2025/08/03'  # Displayed in footer
----
-```
-
-## Keyboard Shortcuts
-
-- **Enter** - Next slide/animation
-- **Backspace** - Previous slide/animation
-- **Click on RevealCard** - Reveal hidden content
-
-## Color Scheme
-
-The theme uses a light color scheme optimized for classroom projection:
-- Background: Pure white (#FFFFFF)
-- Primary: Green (#4CAF50)
-- Text: Dark gray (#333333)
-- Accent colors available via UnoCSS classes
-
-## Font Stack
-
-- **Primary:** M PLUS 2 (Google Fonts) - Excellent for Japanese text
-- **Monospace:** Fira Code
-- **Base size:** 26px with 1.6 line height for optimal readability
+![Utility Example](./example/7.png)
 
 ## Development
-
 ```bash
-# Install dependencies
-npm install
-
-# Start development server
-npm run dev
-
-# Build for production
-npm run build
-
-# Export as PDF
-npm run export
-
-# Generate screenshot
-npm run screenshot
+pnpm install
+pnpm dev
+pnpm build
+pnpm export
+pnpm screenshot
 ```
 
-## Contributing
+## FAQ
+**Q. Do I need to configure fonts manually?**  
+No. Google Fonts are loaded inside the theme.
 
-1. Fork the repository
-2. Create your feature branch
-3. Make your changes
-4. Test with `npm run dev`
-5. Submit a pull request
+**Q. How can I remove the footer?**  
+Override `global-bottom.vue` in your own custom theme.
 
-## License
+**Q. How do I change the numbering start?**  
+Use `:start="[1,'c']"` (array per hierarchy level).
 
-MIT License - see LICENSE file for details.
+## See Also
+Japanese documentation: `README.ja.md`
 
-## Credits
-
-Built with [Slidev](https://sli.dev/) - presentation slides for developers.
-
-## Install
-
-Add the following frontmatter to your `slides.md`. Start Slidev then it will prompt you to install the theme automatically.
-
-<pre><code>---
-theme: <b>slidev-exam-prep</b>
----</code></pre>
-
-Learn more about [how to use a theme](https://sli.dev/guide/theme-addon#use-theme).
-
-## Layouts
-
-This theme provides the following layouts:
-
-> TODO:
-
-## Components
-
-This theme provides the following components:
-
-> TODO:
-
-## Contributing
-
-- `npm install`
-- `npm run dev` to start theme preview of `example.md`
-- Edit the `example.md` and style to see the changes
-- `npm run export` to generate the preview PDF
-- `npm run screenshot` to generate the preview PNG
+Happy teaching! 🎓
