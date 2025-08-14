@@ -36,7 +36,7 @@ author: 講師名
 date: '2025/08/03'
 ```
 
-![フロントマター例](./example/1.png) 
+![フロントマター例](https://raw.githubusercontent.com/watabegg/slidev-exam-prep/refs/heads/main/example/1.png)
 
 ## レイアウト
 | 名称 | 用途 | 特徴 |
@@ -56,7 +56,7 @@ layout: two-cols
 右
 ```
 
-![two-cols 例](./example/3.png)
+![two-cols 例](https://raw.githubusercontent.com/watabegg/slidev-exam-prep/refs/heads/main/example/3.png)
 
 ### image 例
 ```markdown
@@ -81,7 +81,7 @@ image: /path/to/bg.jpg
 デコレータ: `circle | square | paren | dot | q | big-q | none`  
 アイテム内 `label` があればそれを優先表示。
 
-![QuestionList 例](./example/4.png)
+![QuestionList 例](https://raw.githubusercontent.com/watabegg/slidev-exam-prep/refs/heads/main/example/4.png)
 
 ### TextBox
 背景画像上などに絶対配置。
@@ -99,7 +99,7 @@ Props: `x`, `y`, `width`, `height`, `textBg`, `color`, `vClick`
 - `.text-highlight` 行マーカ風ハイライト
 - `.card` 角丸ボックス + 余白 + 枠線
 
-![ユーティリティ例](./example/7.png)
+![ユーティリティ例](https://raw.githubusercontent.com/watabegg/slidev-exam-prep/refs/heads/main/example/7.png)
 
 ## 開発
 ```bash

@@ -40,7 +40,7 @@ author: Instructor Name
 date: '2025/08/03'
 ```
 
-![Frontmatter Example](./example/1.png)
+![Frontmatter Example](https://raw.githubusercontent.com/watabegg/slidev-exam-prep/refs/heads/main/example/1.png)
 
 ## Layouts
 | Name | Purpose | Notes |
@@ -60,7 +60,7 @@ Left
 Right
 ```
 
-![two-cols Example](./example/3.png)
+![two-cols Example](https://raw.githubusercontent.com/watabegg/slidev-exam-prep/refs/heads/main/example/3.png)
 
 ### image Example
 ```markdown
@@ -85,7 +85,7 @@ Counter types: `decimal | hiragana | katakana | kanji | upperalpha | loweralpha 
 Decorators: `circle | square | paren | dot | q | big-q | none`  
 If an item includes a `label`, it overrides the computed label.
 
-![QuestionList Example](./example/4.png)
+![QuestionList Example](https://raw.githubusercontent.com/watabegg/slidev-exam-prep/refs/heads/main/example/4.png)
 
 ### TextBox
 Absolutely positioned overlay (useful on `image` layout or for callouts).
@@ -103,7 +103,7 @@ Props: `x`, `y`, `width`, `height`, `textBg`, `color`, `vClick`
 - `.text-highlight` inline / line-marker style highlight
 - `.card` rounded bordered container with padding
 
-![Utility Example](./example/7.png)
+![Utility Example](https://raw.githubusercontent.com/watabegg/slidev-exam-prep/refs/heads/main/example/7.png)
 
 ## Development
 ```bash
