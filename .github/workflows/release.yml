@@ -1,0 +1,76 @@
+name: Release
+
+on:
+  push:
+    branches: [ main ]
+    # package.json更新コミットでループしないようにフィルタ（ただし今回は他変更と一緒でも動かしたいのでpathsで絞り込まない）
+  workflow_dispatch: {}
+
+permissions:
+  contents: write   # tag作成・package.json push
+  packages: write   # 将来GitHub Packages使う場合
+
+jobs:
+  release:
+    name: Bump version and publish to npm
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # tag差分取得のため
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies (frozen-lockfile)
+        run: |
+          corepack enable
+          pnpm install --frozen-lockfile
+
+      - name: Detect latest tag
+        id: prev
+        run: |
+          LAST_TAG="$(git describe --tags --abbrev=0 2>/dev/null || echo '')"
+          echo "last_tag=$LAST_TAG" >> $GITHUB_OUTPUT
+
+      - name: Bump patch version
+        id: bump
+        run: |
+          CURRENT_VERSION=$(node -p "require('./package.json').version")
+          echo "Current version: $CURRENT_VERSION"
+          # npm version patch は自動で tag も付けるが 一旦 --no-git-tag-version で手動制御
+          NEW_VERSION=$(npm version patch --no-git-tag-version)
+          echo "new_version=${NEW_VERSION#v}" >> $GITHUB_OUTPUT
+
+      - name: Commit version bump
+        run: |
+          NEW_VERSION=${{ steps.bump.outputs.new_version }}
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package.json package-lock.json pnpm-lock.yaml || true
+          git commit -m "chore(release): v$NEW_VERSION" || echo "No changes to commit"
+
+      - name: Create tag
+        run: |
+          NEW_VERSION=${{ steps.bump.outputs.new_version }}
+          git tag v$NEW_VERSION
+
+      - name: Publish to npm
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          npm publish --access public
+
+      - name: Push changes & tags
+        run: |
+          git push origin HEAD:main --follow-tags
+          git push origin --tags
+
+      - name: Summary
+        run: |
+          echo "Released version ${{ steps.bump.outputs.new_version }}" >> $GITHUB_STEP_SUMMARY

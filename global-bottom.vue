@@ -4,7 +4,7 @@
     class="exam-prep-footer"
   >
     <div class="footer-left">
-      <span v-if="$frontmatter.date">{{ $frontmatter.date }}</span>
+      <a v-if="$slidev.configs.link" :href="$slidev.configs.link">ホームに戻る</a>
     </div>
     <div class="footer-right">
       <span>{{ $nav.currentPage }} / {{ $nav.total }}</span>

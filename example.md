@@ -4,8 +4,7 @@ title: Theme Demo
 subtitle: slidevのテーマ exam-prepの紹介
 author: watabegg
 date: '2025/08/03'
----
-
+link: 'https://example.com'
 ---
 
 # 基本機能とスタイル
