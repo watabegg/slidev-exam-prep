@@ -5,6 +5,7 @@ subtitle: slidevのテーマ exam-prepの紹介
 author: watabegg
 date: '2025/08/03'
 link: 'https://example.com'
+color: blue
 ---
 
 # 基本機能とスタイル
@@ -15,6 +16,7 @@ link: 'https://example.com'
 - 入れ子リスト
   - 第二階層
   - もう一つ
+- テーマカラーは frontmatter の `color` で `red | yellow | green | blue | purple` から選択
 
 ```ts
 function hello(name: string) {

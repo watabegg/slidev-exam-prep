@@ -4,6 +4,9 @@
 /* Global Variables */
 :root {
   --slidev-theme-primary: #4CAF50;
+  --cover-gradient-start: #A5D6A7;
+  --cover-gradient-end: #2E7D32;
+  --cover-accent: #2E7D32;
   --slidev-theme-background: #FFFFFF;
   --slidev-theme-text: #333333;
   --slidev-theme-text-secondary: #666666;

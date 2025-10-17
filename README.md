@@ -13,6 +13,7 @@ An education-focused Slidev theme for exam preparation & classroom lessons, opti
 - Automatic footer (date + current/total page) except on `cover` / `image`
 - Shortcuts: Enter (next) / Backspace (previous)
 - Layouts: `cover`, `two-cols`, `image`
+- Frontmatter `color` switch for `red | yellow | green | blue | purple`
 - Components: `QuestionList`, `TextBox`
 - Multi-level labels: circled numbers / Katakana / Hiragana / kanji numerals (1–19) / alphabet / custom
 - Utility classes: `.text-highlight`, `.card`
@@ -38,7 +39,10 @@ title: Class Title
 subtitle: Subtitle
 author: Instructor Name
 date: '2025/08/03'
+color: green # red | yellow | green | blue | purple
 ```
+
+If `color` is omitted, the default `green` palette is used.
 
 ![Frontmatter Example](https://raw.githubusercontent.com/watabegg/slidev-exam-prep/refs/heads/main/example/1.png)
 

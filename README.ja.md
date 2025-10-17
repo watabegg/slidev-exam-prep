@@ -10,6 +10,7 @@
 - 自動フッター（`cover` / `image` 以外で日付 + ページ番号）
 - ショートカット: Enter (次) / Backspace (前)
 - レイアウト: `cover`, `two-cols`, `image`
+- フロントマター `color` でテーマカラーを `red | yellow | green | blue | purple` から選択
 - コンポーネント: `QuestionList`, `TextBox`
 - 多段ラベル: 丸番号 / カタカナ / ひらがな / 漢数字(1–19) / 英字 / カスタム
 - ユーティリティ: `.text-highlight`, `.card`
@@ -34,7 +35,10 @@ title: 授業タイトル
 subtitle: サブタイトル
 author: 講師名
 date: '2025/08/03'
+color: green # red | yellow | green | blue | purple
 ```
+
+`color` を省略するとデフォルトの `green` が適用されます。
 
 ![フロントマター例](https://raw.githubusercontent.com/watabegg/slidev-exam-prep/refs/heads/main/example/1.png)
 

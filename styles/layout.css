@@ -28,7 +28,7 @@
     position: absolute;
     bottom: 2rem;
     right: 2rem;
-    color: #2E7D32;
+    color: var(--cover-accent, #2E7D32);
     font-weight: 600;
     font-size: 1.2rem;
     z-index: 10;

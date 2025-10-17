@@ -1,10 +1,34 @@
+<script setup lang="ts">
+import { watchEffect } from 'vue'
+import { useSlideContext } from '@slidev/client'
+
+import { useActiveThemePalette } from './utils/useThemePalette'
+
+const { $frontmatter, $nav } = useSlideContext()
+
+const { palette: currentPalette } = useActiveThemePalette(() => $frontmatter.color)
+
+watchEffect(() => {
+  if (typeof document === 'undefined')
+    return
+
+  const palette = currentPalette.value
+  const root = document.documentElement
+
+  root.style.setProperty('--slidev-theme-primary', palette.primary)
+  root.style.setProperty('--cover-gradient-start', palette.gradientStart)
+  root.style.setProperty('--cover-gradient-end', palette.gradientEnd)
+  root.style.setProperty('--cover-accent', palette.accent)
+})
+</script>
+
 <template>
   <footer 
     v-if="$nav.currentLayout !== 'cover' && $nav.currentLayout !== 'image'"
     class="exam-prep-footer"
   >
     <div class="footer-left">
-      <a v-if="$slidev.configs.link" :href="$slidev.configs.link">ホームに戻る</a>
+      <a v-if="$frontmatter.link" :href="$frontmatter.link">ホームに戻る</a>
     </div>
     <div class="footer-right">
       <span>{{ $nav.currentPage }} / {{ $nav.total }}</span>
