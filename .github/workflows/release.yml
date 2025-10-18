@@ -3,8 +3,6 @@ name: Release
 on:
   push:
     branches: [ main ]
-  pull_request: 
-    branches: [ main ]
     # package.json更新コミットでループしないようにフィルタ（ただし今回は他変更と一緒でも動かしたいのでpathsで絞り込まない）
   workflow_dispatch: {}
 
