@@ -13,8 +13,9 @@
 </template>
 
 <script setup lang="ts">
-// Using $frontmatter is a robust way to access slide-specific data
-// without relying on props, which can sometimes have naming conflicts.
+import { useSlideContext } from '@slidev/client'
+
+const { $frontmatter } = useSlideContext()
 </script>
 
 <style scoped>

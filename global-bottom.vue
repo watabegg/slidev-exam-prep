@@ -28,7 +28,7 @@ watchEffect(() => {
     class="exam-prep-footer"
   >
     <div class="footer-left">
-      <a v-if="$frontmatter.link" :href="$frontmatter.link">ホームに戻る</a>
+      <a :href="$frontmatter.link">ホームに戻る</a>
     </div>
     <div class="footer-right">
       <span>{{ $nav.currentPage }} / {{ $nav.total }}</span>

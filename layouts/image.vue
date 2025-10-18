@@ -13,7 +13,8 @@
 </template>
 
 <script setup lang="ts">
-// Image layout for the exam prep theme
+import { useSlideContext } from '@slidev/client'
+const { $frontmatter } = useSlideContext()
 </script>
 
 <style scoped>
