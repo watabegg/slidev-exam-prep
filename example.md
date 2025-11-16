@@ -132,3 +132,7 @@ image: 'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format
   <div class="text-xl opacity-80">slidev-theme-exam-prep</div>
   <div class="text-lg opacity-60 mt-4">教育現場向け Slidev テーマ</div>
 </div>
+
+---
+layout: end
+---

@@ -3,8 +3,14 @@ import { watchEffect } from 'vue'
 import { useSlideContext } from '@slidev/client'
 
 import { useActiveThemePalette } from './utils/useThemePalette'
+import getLink from './utils/link'
 
-const { $frontmatter, $nav } = useSlideContext()
+const { $frontmatter, $nav, $slidev } = useSlideContext()
+
+const link = getLink({
+  frontmatter: $frontmatter,
+  slidevConfigs: $slidev?.configs as Record<string, unknown> | undefined,
+})
 
 const { palette: currentPalette } = useActiveThemePalette(() => $frontmatter.color)
 
@@ -28,10 +34,11 @@ watchEffect(() => {
     class="exam-prep-footer"
   >
     <div class="footer-left">
-      <a :href="$frontmatter.link">ホームに戻る</a>
     </div>
     <div class="footer-right">
       <span>{{ $nav.currentPage }} / {{ $nav.total }}</span>
+      <a v-if="link" :href="link">ホームに戻る</a>
+      <span v-else>ホームリンク未設定</span>
     </div>
   </footer>
 </template>
@@ -57,6 +64,7 @@ watchEffect(() => {
 .footer-left,
 .footer-right {
   display: flex;
+  flex-direction: column;
   align-items: center;
 }
 </style>
