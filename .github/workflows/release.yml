@@ -6,6 +6,10 @@ on:
     # package.json更新コミットでループしないようにフィルタ（ただし今回は他変更と一緒でも動かしたいのでpathsで絞り込まない）
   workflow_dispatch: {}
 
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
 permissions:
   contents: write   # tag作成・package.json push
   packages: write   # 将来GitHub Packages使う場合
@@ -47,7 +51,25 @@ jobs:
           NEW_VERSION=$(npm version patch --no-git-tag-version)
           echo "new_version=${NEW_VERSION#v}" >> $GITHUB_OUTPUT
 
+      - name: Check if tag already exists
+        id: tagcheck
+        run: |
+          NEW_VERSION=${{ steps.bump.outputs.new_version }}
+          git fetch --tags --force
+          if git rev-parse -q --verify "refs/tags/v$NEW_VERSION" >/dev/null; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+            echo "Tag v$NEW_VERSION already exists. Skipping release." >> $GITHUB_STEP_SUMMARY
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Revert version bump when skipping
+        if: steps.tagcheck.outputs.exists == 'true'
+        run: |
+          git checkout -- package.json package-lock.json pnpm-lock.yaml 2>/dev/null || true
+
       - name: Commit version bump
+        if: steps.tagcheck.outputs.exists == 'false'
         run: |
           NEW_VERSION=${{ steps.bump.outputs.new_version }}
           git config user.name "github-actions[bot]"
@@ -56,21 +78,25 @@ jobs:
           git commit -m "chore(release): v$NEW_VERSION" || echo "No changes to commit"
 
       - name: Create tag
+        if: steps.tagcheck.outputs.exists == 'false'
         run: |
           NEW_VERSION=${{ steps.bump.outputs.new_version }}
           git tag v$NEW_VERSION
 
       - name: Publish to npm
+        if: steps.tagcheck.outputs.exists == 'false'
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           npm publish --access public
 
       - name: Push changes & tags
+        if: steps.tagcheck.outputs.exists == 'false'
         run: |
           git push origin HEAD:main --follow-tags
           git push origin --tags
 
       - name: Summary
+        if: steps.tagcheck.outputs.exists == 'false'
         run: |
           echo "Released version ${{ steps.bump.outputs.new_version }}" >> $GITHUB_STEP_SUMMARY
