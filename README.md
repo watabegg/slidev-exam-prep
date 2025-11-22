@@ -14,7 +14,7 @@ An education-focused Slidev theme for exam preparation & classroom lessons, opti
 - Shortcuts: Enter (next) / Backspace (previous)
 - Layouts: `cover`, `two-cols`, `image`
 - Frontmatter `color` switch for `red | yellow | green | blue | purple`
-- Components: `QuestionList`, `TextBox`
+- Components: `QuestionList`, `TextBox`, `KaTexReveal`
 - Multi-level labels: circled numbers / Katakana / Hiragana / kanji numerals (1–19) / alphabet / custom
 - Utility classes: `.text-highlight`, `.card`
 - Shiki code themes: `vitesse-light` / `vitesse-dark`
@@ -97,6 +97,14 @@ Absolutely positioned overlay (useful on `image` layout or for callouts).
 <TextBox :x="100" :y="220" :width="400" textBg="green" v-click="1">Memo</TextBox>
 ```
 Props: `x`, `y`, `width`, `height`, `textBg`, `color`, `vClick`
+
+### KaTexReveal
+Inline/Block KaTeX renderer component. Slidev auto-registers `components/*.vue`, so you can drop it directly into Markdown.
+```vue
+<KaTexReveal formula="\\int_0^{2\\pi} \\sin x\\,dx = 0" block class="text-2xl" />
+<KaTexReveal formula="E = mc^2" :block="false" v-click="1" />
+```
+Props: `formula` (required string), `block` (default `false`), `tag` (fallbacks to `div`/`span`), plus any other attrs (`class`, `v-click`, etc.) forwarded to the wrapper. Also consumed by `QuestionList` when an item contains TeX delimiters, `formula`, or `tex: true`.
 
 ## Footer & Shortcuts
 - Footer (except on cover / image): displays `date` + current / total pages.

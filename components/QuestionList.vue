@@ -3,8 +3,14 @@
     <div v-for="(item, index) in items" :key="index" class="question-item">
       <div class="item-content">
         <span class="item-label" v-html="getLabel(index)"></span>
-        <span v-if="getItemText(item)" class="item-text">
-          <component :is="renderMarkdown(getItemText(item))" />
+        <span v-if="hasRenderableContent(item)" class="item-text">
+          <KaTexReveal
+            v-if="isKatexItem(item)"
+            :formula="getFormula(item)"
+            :block="isBlockFormula(item)"
+            v-bind="getKatexAttrs(item)"
+          />
+          <component v-else :is="renderMarkdown(getItemText(item))" />
         </span>
       </div>
       <div v-if="hasSubItems(item)" class="sub-list" :style="{ marginTop: getItemText(item) ? '1rem' : '0' }">
@@ -21,6 +27,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
+import KaTexReveal from './KaTexReveal.vue';
 import { renderMarkdown } from '../utils/render';
 
 const props = withDefaults(defineProps<{
@@ -35,6 +42,101 @@ const props = withDefaults(defineProps<{
 });
 
 const currentLevel = computed(() => props.level ?? 0);
+
+const TEX_WRAPPERS = [
+  { start: '$$', end: '$$' },
+  { start: '\\[', end: '\\]' },
+  { start: '\\(', end: '\\)' },
+];
+
+const stripTexDelimiters = (value: string): string => {
+  const trimmed = value.trim();
+  for (const { start, end } of TEX_WRAPPERS) {
+    if (trimmed.startsWith(start) && trimmed.endsWith(end)) {
+      return trimmed.slice(start.length, trimmed.length - end.length).trim();
+    }
+  }
+  return trimmed;
+};
+
+const extractFormulaFromText = (value?: string): string => {
+  if (!value) return '';
+  const trimmed = value.trim();
+  for (const { start, end } of TEX_WRAPPERS) {
+    if (trimmed.startsWith(start) && trimmed.endsWith(end)) {
+      return stripTexDelimiters(trimmed);
+    }
+  }
+  return '';
+};
+
+const hasRenderableContent = (item: string | Record<string, any>): boolean => {
+  if (isKatexItem(item)) return true;
+  return Boolean(getItemText(item).trim());
+};
+
+const normalizedItemType = (item: Record<string, any>): string => {
+  if (typeof item.type !== 'string') return '';
+  return item.type.toLowerCase();
+};
+
+const getFormula = (item: string | Record<string, any>): string => {
+  if (typeof item === 'object') {
+    if (typeof item.formula === 'string' && item.formula.trim()) {
+      return stripTexDelimiters(item.formula);
+    }
+    const hint = item.tex === true || ['katex', 'tex', 'math'].includes(normalizedItemType(item));
+    if (hint && typeof item.text === 'string') {
+      return stripTexDelimiters(item.text);
+    }
+    const extracted = extractFormulaFromText(item.text);
+    return extracted;
+  }
+  return extractFormulaFromText(item) || '';
+};
+
+const isKatexItem = (item: string | Record<string, any>): boolean => {
+  return Boolean(getFormula(item));
+};
+
+const isBlockFormula = (item: string | Record<string, any>): boolean => {
+  if (typeof item === 'object' && typeof item.block === 'boolean') {
+    return item.block;
+  }
+
+  const source = typeof item === 'string'
+    ? item
+    : typeof item.formula === 'string'
+      ? item.formula
+      : typeof item.text === 'string'
+        ? item.text
+        : '';
+  const trimmed = source.trim();
+  if (!trimmed) return true;
+  if (trimmed.startsWith('\\(') && trimmed.endsWith('\\)')) return false;
+  if (trimmed.startsWith('$') && trimmed.endsWith('$') && !trimmed.startsWith('$$')) return false;
+  if (trimmed.startsWith('$$') && trimmed.endsWith('$$')) return true;
+  if (trimmed.startsWith('\\[') && trimmed.endsWith('\\]')) return true;
+  return true;
+};
+
+const reservedItemKeys = new Set(['text', 'items', 'label', 'block', 'type', 'tex', 'formula', 'attrs']);
+
+const getKatexAttrs = (item: string | Record<string, any>): Record<string, any> => {
+  if (typeof item !== 'object') {
+    return {};
+  }
+  if (item.attrs && typeof item.attrs === 'object') {
+    return item.attrs;
+  }
+  const attrs: Record<string, any> = {};
+  Object.keys(item).forEach((key) => {
+    if (!reservedItemKeys.has(key)) {
+      attrs[key] = item[key];
+    }
+  });
+  return attrs;
+};
 
 const getItemText = (item: string | Record<string, any>): string => 
   (typeof item === 'string' ? item : item.text) || '';

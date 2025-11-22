@@ -11,7 +11,7 @@
 - ショートカット: Enter (次) / Backspace (前)
 - レイアウト: `cover`, `two-cols`, `image`
 - フロントマター `color` でテーマカラーを `red | yellow | green | blue | purple` から選択
-- コンポーネント: `QuestionList`, `TextBox`
+- コンポーネント: `QuestionList`, `TextBox`, `KaTexReveal`
 - 多段ラベル: 丸番号 / カタカナ / ひらがな / 漢数字(1–19) / 英字 / カスタム
 - ユーティリティ: `.text-highlight`, `.card`
 - Shiki テーマ: vitesse-light / vitesse-dark
@@ -93,6 +93,14 @@ image: /path/to/bg.jpg
 <TextBox :x="100" :y="220" :width="400" textBg="green" v-click="1">メモ</TextBox>
 ```
 Props: `x`, `y`, `width`, `height`, `textBg`, `color`, `vClick`
+
+### KaTexReveal
+KaTeX API で数式を確実に描画するコンポーネント。`components/*.vue` は Slidev が自動登録するので、そのまま Markdown で利用できます。
+```vue
+<KaTexReveal formula="\\int_0^{2\\pi} \\sin x\\,dx = 0" block class="text-2xl" />
+<KaTexReveal formula="E = mc^2" :block="false" v-click="1" />
+```
+Props: `formula`(必須), `block`(既定 false), `tag`(省略時 `div`/`span` 自動), そのほか `class` や `v-click` など任意の属性も転送。`QuestionList` のアイテムに TeX が含まれる場合もこのコンポーネントで描画されます。
 
 ## フッター & ショートカット
 - フッター: (cover/image 以外) `date` + 現在ページ/総ページ

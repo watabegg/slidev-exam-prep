@@ -82,6 +82,46 @@ console.log(doubled)
 />
 
 ---
+
+# KaTeX と QuestionList
+
+<KaTexReveal formula="\\int_0^{2\\pi} \\sin x\\,dx = 0" block class="text-2xl" />
+
+<KaTexReveal
+  formula="E = mc^2"
+  :block="false"
+  class="text-primary font-bold"
+  v-click="1"
+/>
+
+---
+layout: center
+---
+
+# KaTeX と Markdown の混在
+
+<QuestionList
+  :items="[
+    {
+      label: '①',
+      text: 'Markdownと **KaTeX** を混在',
+      items: [
+        { formula: 'a^2 + b^2 = c^2', block: true, class: 'text-lg text-center', tex: true },
+        { text: '$$\\frac{d}{dx} \\sin x = \\cos x$$' }
+      ]
+    },
+    {
+      label: '②',
+      formula: '\\sum_{k=1}^n k = \\frac{n(n+1)}{2}',
+      block: false,
+      class: 'text-xl'
+    }
+  ]"
+  :styles="['decimal-circle','loweralpha-paren']"
+  :start="[1]"
+/>
+
+---
 layout: image
 image: 'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=2370&q=80'
 ---
