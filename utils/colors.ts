@@ -23,10 +23,10 @@ export const themePalettes: Record<ThemeColorKey, ThemePalette> = {
     accent: '#F57F17',
   },
   green: {
-    primary: '#4CAF50',
+    primary: '#448f47',
     gradientStart: '#A5D6A7',
-    gradientEnd: '#2E7D32',
-    accent: '#2E7D32',
+    gradientEnd: '#2b702e',
+    accent: '#215724',
   },
   blue: {
     primary: '#1E88E5',
