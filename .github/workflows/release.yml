@@ -2,8 +2,7 @@ name: Release
 
 on:
   push:
-    branches: [ main ]
-    # package.json更新コミットでループしないようにフィルタ（ただし今回は他変更と一緒でも動かしたいのでpathsで絞り込まない）
+    tags: [ "v*" ] # vX.Y.Z タグがpushされたらリリース
   workflow_dispatch: {}
 
 concurrency:
@@ -16,14 +15,14 @@ permissions:
 
 jobs:
   release:
-    name: Bump version and publish to npm
+    name: Publish tagged release to npm
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # tag差分取得のため
+          fetch-depth: 0 # ensure tags are available
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -36,67 +35,19 @@ jobs:
           corepack enable
           pnpm install --frozen-lockfile
 
-      - name: Detect latest tag
-        id: prev
+      - name: Extract version from tag
+        id: tag
         run: |
-          LAST_TAG="$(git describe --tags --abbrev=0 2>/dev/null || echo '')"
-          echo "last_tag=$LAST_TAG" >> $GITHUB_OUTPUT
-
-      - name: Bump patch version
-        id: bump
-        run: |
-          CURRENT_VERSION=$(node -p "require('./package.json').version")
-          echo "Current version: $CURRENT_VERSION"
-          # npm version patch は自動で tag も付けるが 一旦 --no-git-tag-version で手動制御
-          NEW_VERSION=$(npm version patch --no-git-tag-version)
-          echo "new_version=${NEW_VERSION#v}" >> $GITHUB_OUTPUT
-
-      - name: Check if tag already exists
-        id: tagcheck
-        run: |
-          NEW_VERSION=${{ steps.bump.outputs.new_version }}
-          git fetch --tags --force
-          if git rev-parse -q --verify "refs/tags/v$NEW_VERSION" >/dev/null; then
-            echo "exists=true" >> $GITHUB_OUTPUT
-            echo "Tag v$NEW_VERSION already exists. Skipping release." >> $GITHUB_STEP_SUMMARY
-          else
-            echo "exists=false" >> $GITHUB_OUTPUT
-          fi
-
-      - name: Revert version bump when skipping
-        if: steps.tagcheck.outputs.exists == 'true'
-        run: |
-          git checkout -- package.json package-lock.json pnpm-lock.yaml 2>/dev/null || true
-
-      - name: Commit version bump
-        if: steps.tagcheck.outputs.exists == 'false'
-        run: |
-          NEW_VERSION=${{ steps.bump.outputs.new_version }}
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add package.json package-lock.json pnpm-lock.yaml || true
-          git commit -m "chore(release): v$NEW_VERSION" || echo "No changes to commit"
-
-      - name: Create tag
-        if: steps.tagcheck.outputs.exists == 'false'
-        run: |
-          NEW_VERSION=${{ steps.bump.outputs.new_version }}
-          git tag v$NEW_VERSION
+          TAG_NAME="${GITHUB_REF_NAME:-${GITHUB_REF##*/}}"
+          echo "tag=$TAG_NAME" >> $GITHUB_OUTPUT
+          echo "version=${TAG_NAME#v}" >> $GITHUB_OUTPUT
 
       - name: Publish to npm
-        if: steps.tagcheck.outputs.exists == 'false'
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           npm publish --access public
 
-      - name: Push changes & tags
-        if: steps.tagcheck.outputs.exists == 'false'
-        run: |
-          git push origin HEAD:main --follow-tags
-          git push origin --tags
-
       - name: Summary
-        if: steps.tagcheck.outputs.exists == 'false'
         run: |
-          echo "Released version ${{ steps.bump.outputs.new_version }}" >> $GITHUB_STEP_SUMMARY
+          echo "Released version ${{ steps.tag.outputs.version }} from tag ${{ steps.tag.outputs.tag }}" >> $GITHUB_STEP_SUMMARY

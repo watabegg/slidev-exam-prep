@@ -97,12 +97,12 @@
   }
 }
 
-.slidev-layout:not(.cover, .image) {
+.slidev-layout:not(.cover, .image, .image-scroll) {
   position: relative;
   padding-bottom: 4rem; 
 }
 
-.slidev-layout:not(.cover, .image)::after {
+.slidev-layout:not(.cover, .image, .image-scroll)::after {
   content: '';
   position: absolute;
   bottom: 0;
@@ -114,7 +114,7 @@
 }
 
 /* Global header positioning for non-cover layouts */
-.slidev-layout:not(.cover, .image) h1:first-child {
+.slidev-layout:not(.cover, .image, .image-scroll) h1:first-child {
   position: fixed;
   top: 2rem;
   left: 2rem;
