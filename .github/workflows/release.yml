@@ -44,8 +44,6 @@ jobs:
           echo "version=${TAG_NAME#v}" >> $GITHUB_OUTPUT
 
       - name: Publish to npm
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           npm publish --provenance --access public
 
