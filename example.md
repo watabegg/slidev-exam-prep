@@ -1,7 +1,7 @@
 ---
 theme: ./
 title: Theme Demo
-subtitle: slidevのテーマ exam-prepの紹介
+subtitle: slidevのテーマ watabeggの紹介
 author: watabegg
 date: '2025/08/03'
 link: 'https://example.com'
@@ -169,8 +169,8 @@ image: 'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format
 
 <div class="text-center mt-16">
   <div class="text-4xl mb-4">🎓</div>
-  <div class="text-xl opacity-80">slidev-theme-exam-prep</div>
-  <div class="text-lg opacity-60 mt-4">教育現場向け Slidev テーマ</div>
+  <div class="text-xl opacity-80">slidev-theme-watabegg</div>
+  <div class="text-lg opacity-60 mt-4">watabegg Slidev テーマ</div>
 </div>
 
 ---

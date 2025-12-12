@@ -1,8 +1,8 @@
 {
-  "name": "slidev-theme-exam-prep",
-  "version": "1.5.6",
+  "name": "slidev-theme-watabegg",
+  "version": "1.0.0",
   "type": "module",
-  "description": "watabeggが塾の集団授業で使うためのSlidevテーマ",
+  "description": "watabeggが使うためのSlidevテーマ",
   "keywords": [
     "slidev-theme",
     "slidev",

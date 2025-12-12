@@ -1,6 +1,6 @@
-# slidev-theme-exam-prep (日本語ドキュメント)
+# slidev-theme-watabegg (日本語ドキュメント)
 
-[![NPM version](https://img.shields.io/npm/v/slidev-theme-exam-prep?color=3AB9D4&label=)](https://www.npmjs.com/package/slidev-theme-exam-prep)
+[![NPM version](https://img.shields.io/npm/v/slidev-theme-watabegg?color=3AB9D4&label=)](https://www.npmjs.com/package/slidev-theme-watabegg)
 
 教育現場（集団授業・試験対策）向けに視認性と操作性を重視した Slidev テーマです。普通に自分用に開発しました。
 
@@ -19,7 +19,7 @@
 ## インストール
 ```yaml
 ---
-theme: slidev-theme-exam-prep
+theme: slidev-theme-watabegg
 ---
 ```
 ローカル開発（クローンしたリポジトリで）:
