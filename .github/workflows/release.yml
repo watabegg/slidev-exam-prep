@@ -10,8 +10,9 @@ concurrency:
   cancel-in-progress: false
 
 permissions:
-  contents: write   # tag作成・package.json push
-  packages: write   # 将来GitHub Packages使う場合
+  contents: write
+  packages: write
+  id-token: write
 
 jobs:
   release:
@@ -46,7 +47,7 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          npm publish --access public
+          npm publish --provenance --access public
 
       - name: Summary
         run: |
