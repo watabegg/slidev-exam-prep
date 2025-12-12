@@ -2,6 +2,7 @@
   "name": "slidev-theme-watabegg",
   "version": "1.0.2",
   "type": "module",
+  "author": "watabegg",
   "description": "watabeggが使うためのSlidevテーマ",
   "keywords": [
     "slidev-theme",
@@ -12,6 +13,10 @@
   ],
   "engines": {
     "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/watabegg/slidev-theme-watabegg"
   },
   "scripts": {
     "build": "slidev build example.md",
