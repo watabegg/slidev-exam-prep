@@ -36,17 +36,6 @@ jobs:
           corepack enable
           pnpm install --frozen-lockfile
 
-      - name: Extract version from tag
-        id: tag
-        run: |
-          TAG_NAME="${GITHUB_REF_NAME:-${GITHUB_REF##*/}}"
-          echo "tag=$TAG_NAME" >> $GITHUB_OUTPUT
-          echo "version=${TAG_NAME#v}" >> $GITHUB_OUTPUT
-
       - name: Publish to npm
         run: |
           npm publish --provenance --access public
-
-      - name: Summary
-        run: |
-          echo "Released version ${{ steps.tag.outputs.version }} from tag ${{ steps.tag.outputs.tag }}" >> $GITHUB_STEP_SUMMARY
