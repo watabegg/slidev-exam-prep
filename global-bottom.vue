@@ -30,7 +30,7 @@ watchEffect(() => {
 
 <template>
   <footer 
-    v-if="$nav.currentLayout !== 'cover' && $nav.currentLayout !== 'image'"
+    v-if="$nav.currentLayout !== 'cover' && $nav.currentLayout !== 'image' && $nav.currentLayout !== 'image-scroll'"
     class="exam-prep-footer"
   >
     <div class="footer-left">

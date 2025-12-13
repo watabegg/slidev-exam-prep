@@ -3,7 +3,8 @@
   "version": "1.0.3",
   "type": "module",
   "author": "watabegg",
-  "description": "watabeggが使うためのSlidevテーマ",
+  "description": "Slidev theme for educational purposes, especially teaching.",
+  "license": "MIT",
   "keywords": [
     "slidev-theme",
     "slidev",

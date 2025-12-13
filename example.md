@@ -1,11 +1,12 @@
 ---
 theme: ./
 title: Theme Demo
-subtitle: slidevのテーマ watabeggの紹介
+subtitle: slidev-theme-watabeggの紹介
 author: watabegg
 date: '2025/08/03'
 link: 'https://example.com'
 color: blue
+transition: fade
 ---
 
 # 基本機能とスタイル
@@ -24,7 +25,7 @@ function hello(name: string) {
 }
 ```
 
-> ヒント: 最初の h1 は固定ヘッダになります。
+> ヒント: 最初の h1 は`image`, `image-scroll`Layout以外で固定ヘッダになります。
 
 ---
 layout: two-cols
@@ -54,7 +55,7 @@ console.log(doubled)
 
 <QuestionList
   :items="[
-    '最初の項目 **Markdown OK**',
+    '正答のためのリストコンポーネント **Markdown OK**',
     {
       text: '2番目 (子を含む)',
       items: [
@@ -63,7 +64,7 @@ console.log(doubled)
         { text: 'さらにネスト', items: ['深い1', '深い2'] }
       ]
     },
-    { label: '★', text: 'カスタムラベル' }
+    { label: '★', text: 'labelスタイルも複数用意しカスタムも可能。' }
   ]"
   :styles="['decimal-circle','katakana-paren','loweralpha-dot']"
 />
@@ -71,6 +72,8 @@ console.log(doubled)
 ---
 
 # QuestionList start 指定
+
+配列で各階層の開始番号/文字を指定可能。
 
 <QuestionList
   :items="[
@@ -84,6 +87,8 @@ console.log(doubled)
 ---
 
 # KaTeX と QuestionList
+
+KaTeX コンポーネント `<KaTexReveal>` を QuestionList 内で使用可能。
 
 <KaTexReveal formula="\\int_0^{2\\pi} \\sin x\\,dx = 0" block class="text-2xl" />
 
@@ -126,10 +131,21 @@ layout: image
 image: 'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=2370&q=80'
 ---
 
-<TextBox :x="80" :y="140" :width="360" v-click="1">**1番目** に表示される注釈。</TextBox>
+<TextBox :x="80" :y="140" :width="360" v-click="1">1番目に表示される注釈。</TextBox>
 <TextBox :x="200" :y="380" :width="340" textBg="green" v-click="2">背景色付き 2番目。</TextBox>
-<TextBox :x="500" :y="120" :width="300" color="blue">常時表示 (青文字)。</TextBox>
+<TextBox :x="500" :y="120" :width="300" color="red">常時表示 (赤文字)。</TextBox>
 <TextBox :x="40" :y="20" :width="420" textBg="yellow" v-click="3">最後に表示される黄色背景。</TextBox>
+
+---
+layout: image-scroll
+image: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=2400&q=80'
+---
+
+- マウスホイール: 拡大
+- Shift + ホイール: 縮小
+- 左クリックホールド + ドラッグ: 移動
+
+画像を全画面で扱いつつ、ズーム・パンを試せます。
 
 ---
 
@@ -150,41 +166,18 @@ image: 'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format
 
 - Enter: 次のスライド / v-click
 - Backspace: 前へ戻る
-- フッター: (cover / image 以外) 日付 + ページ番号
+- フッター: (cover / image / image-scroll 以外) 日付 + ページ番号
 
 ---
 
 # まとめ
 
-- レイアウト: cover / two-cols / image
-- コンポーネント: QuestionList / TextBox
+- レイアウト: cover / two-cols / image / image-scroll / end
+- コンポーネント: QuestionList / TextBox / KaTexReveal
 - 自動フッター & 固定ヘッダ
 - ラベルスタイル多彩 & Markdown 埋め込み
 
-ご利用ありがとうございます 🎓
-
----
-
-# 終了
-
-<div class="text-center mt-16">
-  <div class="text-4xl mb-4">🎓</div>
-  <div class="text-xl opacity-80">slidev-theme-watabegg</div>
-  <div class="text-lg opacity-60 mt-4">watabegg Slidev テーマ</div>
-</div>
-
----
-layout: image-scroll
-image: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=2400&q=80'
----
-
-# image-scroll レイアウト
-
-- マウスホイール: 拡大
-- Shift + ホイール: 縮小
-- 左クリックホールド + ドラッグ: 移動
-
-画像を全画面で扱いつつ、ズーム・パンを試せます。
+ご利用ありがとうございます
 
 ---
 layout: end
