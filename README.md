@@ -48,7 +48,7 @@ If `color` is omitted, the default `green` palette is used.
 
 Below: `color: blue` example.
 
-![Frontmatter Example](https://raw.githubusercontent.com/watabegg/slidev-exam-prep/refs/heads/main/example/0.png)
+![Frontmatter Example](https://raw.githubusercontent.com/watabegg/slidev-theme-watabegg/refs/heads/main/example/0.png)
 
 ## Layouts
 | Name | Purpose | Notes |
@@ -70,7 +70,7 @@ Left
 Right
 ```
 
-![two-cols Example](https://raw.githubusercontent.com/watabegg/slidev-exam-prep/refs/heads/main/example/1.png)
+![two-cols Example](https://raw.githubusercontent.com/watabegg/slidev-theme-watabegg/refs/heads/main/example/1.png)
 
 ### image Example
 ```markdown
@@ -122,7 +122,7 @@ KaTeX renderer to ensure math always draws. Slidev auto-registers `components/*.
 ```
 Props: `formula` (required), `block` (default `false`), `tag` (auto `div`/`span`), other attrs (`class`, `v-click`, etc.) are forwarded.
 
-![KaTeX Example](https://raw.githubusercontent.com/watabegg/slidev-exam-prep/refs/heads/main/example/4.png)
+![KaTeX Example](https://raw.githubusercontent.com/watabegg/slidev-theme-watabegg/refs/heads/main/example/4.png)
 
 ## Footer & Shortcuts
 - Footer (except on `cover` / `image` / `image-scroll`): shows `date` + current/total pages.
@@ -133,7 +133,7 @@ Props: `formula` (required), `block` (default `false`), `tag` (auto `div`/`span`
 - `.text-highlight` line-marker style highlight
 - `.card` rounded box with padding and border
 
-![Utility Example](https://raw.githubusercontent.com/watabegg/slidev-exam-prep/refs/heads/main/example/7.png)
+![Utility Example](https://raw.githubusercontent.com/watabegg/slidev-theme-watabegg/refs/heads/main/example/7.png)
 
 ## Development
 ```bash
