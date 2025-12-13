@@ -105,7 +105,7 @@ Counter types: `decimal | hiragana | katakana | kanji | upperalpha | loweralpha 
 Decorators: `circle | square | paren | dot | q | big-q | none`  
 If an item includes a `label`, it overrides the computed label.
 
-![QuestionList Example](https://raw.githubusercontent.com/watabegg/slidev-exam-prep/refs/heads/main/example/3.png)
+![QuestionList Example](https://raw.githubusercontent.com/watabegg/slidev-theme-watabegg/refs/heads/main/example/3.png)
 
 ### TextBox
 Absolutely positioned overlay (useful on `image` / `image-scroll` or for callouts).
