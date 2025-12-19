@@ -87,6 +87,29 @@ image: /path/to/long-bg.jpg
 
 ![image-scroll 例](https://raw.githubusercontent.com/watabegg/slidev-theme-watabegg/refs/heads/main/example/7.png)
 
+image-scroll オプション（frontmatter `imageScroll`）:
+- `fit`: `contain | cover | width | height`（既定 `contain`）
+- `position`: `center | top | bottom | left | right` もしくは組み合わせ（例: `top left`）
+- `offset`: `[x, y]` または `{ x, y }`（px）
+
+操作:
+- Wheel: 縦パン
+- Shift + Wheel: 横パン
+- Alt + Wheel: 10% ずつ拡大縮小
+- タッチ: ドラッグでパン、ピンチでズーム
+
+初期フィット/位置の例:
+```markdown
+---
+layout: image-scroll
+image: /path/to/long-bg.jpg
+imageScroll:
+  fit: width
+  position: center
+  offset: [0, -120]
+---
+```
+
 ## コンポーネント
 ### QuestionList
 入れ子質問/解答・Markdown 埋め込み・階層別スタイル。

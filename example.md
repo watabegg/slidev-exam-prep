@@ -139,6 +139,9 @@ image: 'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format
 ---
 layout: image-scroll
 image: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=2400&q=80'
+imageScroll:
+  fit: width
+  position: center
 ---
 
 - マウスホイール: 拡大

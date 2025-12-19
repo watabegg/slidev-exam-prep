@@ -91,6 +91,29 @@ image: /path/to/long-bg.jpg
 
 ![image-scroll Example](https://raw.githubusercontent.com/watabegg/slidev-theme-watabegg/refs/heads/main/example/7.png)
 
+image-scroll options (frontmatter `imageScroll`):
+- `fit`: `contain | cover | width | height` (default `contain`)
+- `position`: `center | top | bottom | left | right` or combined (e.g. `top left`)
+- `offset`: `[x, y]` or `{ x, y }` in px
+
+Controls:
+- Wheel: pan vertically
+- Shift + Wheel: pan horizontally
+- Alt + Wheel: zoom in/out by 10%
+- Touch: drag to pan, pinch to zoom
+
+Example with initial fit/position:
+```markdown
+---
+layout: image-scroll
+image: /path/to/long-bg.jpg
+imageScroll:
+  fit: width
+  position: center
+  offset: [0, -120]
+---
+```
+
 ## Components
 ### QuestionList
 Nested questions/answers with per-level styles and Markdown rendering.
