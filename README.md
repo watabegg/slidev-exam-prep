@@ -56,7 +56,7 @@ Below: `color: blue` example.
 | cover | Title slide | Gradient wave + title/subtitle/author |
 | two-cols | Two columns | Slots: `::left::` / `::right::` |
 | image | Background image | Use `image:` + absolutely placed `TextBox` |
-| image-scroll | Background image (pan & zoom) | Use `image:` with tall background + `TextBox` |
+| image-scroll | Background image (vertical scroll) | Use `image:` with tall background + `TextBox` |
 | end | Ending slide | Simple finish screen |
 
 ### two-cols Example
@@ -86,31 +86,27 @@ image: /path/to/bg.jpg
 ---
 layout: image-scroll
 image: /path/to/long-bg.jpg
+imageScroll:
+  offsetY: -120
 ---
 ```
 
 ![image-scroll Example](https://raw.githubusercontent.com/watabegg/slidev-theme-watabegg/refs/heads/main/example/7.png)
 
 image-scroll options (frontmatter `imageScroll`):
-- `fit`: `contain | cover | width | height` (default `contain`)
-- `position`: `center | top | bottom | left | right` or combined (e.g. `top left`)
-- `offset`: `[x, y]` or `{ x, y }` in px
+- `offsetY`: initial scroll offset from image center in px
 
 Controls:
-- Wheel: pan vertically
-- Shift + Wheel: pan horizontally
-- Alt + Wheel: zoom in/out by 10%
-- Touch: drag to pan, pinch to zoom
+- Wheel / trackpad: vertical scroll
+- Touch: vertical scroll
 
-Example with initial fit/position:
+Example with initial position:
 ```markdown
 ---
 layout: image-scroll
 image: /path/to/long-bg.jpg
 imageScroll:
-  fit: width
-  position: center
-  offset: [0, -120]
+  offsetY: 180
 ---
 ```
 

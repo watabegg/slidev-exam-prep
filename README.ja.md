@@ -52,7 +52,7 @@ transition: fade
 | cover | 表紙 | グラデーション波 + title/subtitle/author |
 | two-cols | 2カラム | `::left::` / `::right::` スロット |
 | image | 背景画像 | `image:` 指定 + `TextBox` で自由配置 |
-| image-scroll | 背景画像（パンとズーム） | `image:` 指定 + 縦長背景 + `TextBox` |
+| image-scroll | 背景画像（縦スクロール） | `image:` 指定 + 縦長背景 + `TextBox` |
 | end | 終了スライド | シンプルな終了画面 |
 
 ### two-cols 例
@@ -82,31 +82,27 @@ image: /path/to/bg.jpg
 ---
 layout: image-scroll
 image: /path/to/long-bg.jpg
+imageScroll:
+  offsetY: -120
 ---
 ```
 
 ![image-scroll 例](https://raw.githubusercontent.com/watabegg/slidev-theme-watabegg/refs/heads/main/example/7.png)
 
 image-scroll オプション（frontmatter `imageScroll`）:
-- `fit`: `contain | cover | width | height`（既定 `contain`）
-- `position`: `center | top | bottom | left | right` もしくは組み合わせ（例: `top left`）
-- `offset`: `[x, y]` または `{ x, y }`（px）
+- `offsetY`: 画像の中心からの初期スクロール量（px）
 
 操作:
-- Wheel: 縦パン
-- Shift + Wheel: 横パン
-- Alt + Wheel: 10% ずつ拡大縮小
-- タッチ: ドラッグでパン、ピンチでズーム
+- Wheel / トラックパッド: 縦スクロール
+- タッチ: 縦スクロール
 
-初期フィット/位置の例:
+初期位置の例:
 ```markdown
 ---
 layout: image-scroll
 image: /path/to/long-bg.jpg
 imageScroll:
-  fit: width
-  position: center
-  offset: [0, -120]
+  offsetY: 180
 ---
 ```
 

@@ -140,15 +140,25 @@ image: 'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format
 layout: image-scroll
 image: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=2400&q=80'
 imageScroll:
-  fit: width
-  position: center
+  offsetY: -120
 ---
 
-- マウスホイール: 拡大
-- Shift + ホイール: 縮小
-- 左クリックホールド + ドラッグ: 移動
+## image-scroll: 縦長画像を「横幅フィット＋縦スクロール」で表示
 
-画像を全画面で扱いつつ、ズーム・パンを試せます。
+- 画像はスライド幅に合わせて表示
+- 縦方向はホイール / タッチでスクロール
+- `offsetY` で初期位置を調整（中心からのpx）
+
+ここでは `offsetY: -120` で少し上寄せしています。
+
+---
+layout: image-scroll
+image: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=2400&q=80'
+---
+
+## offsetY の例（中心から上へ 300px）
+
+背景の見せたい位置が決まっているときに便利です。
 
 ---
 
