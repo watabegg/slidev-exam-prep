@@ -1,18 +1,26 @@
 <script setup lang="ts">
-import { watchEffect } from 'vue'
-import { useSlideContext } from '@slidev/client'
+import { computed, watchEffect } from 'vue'
+import { useNav, useSlideContext } from '@slidev/client'
 
 import { useActiveThemePalette } from './utils/useThemePalette'
 import getLink from './utils/link'
 
-const { $frontmatter, $nav, $slidev } = useSlideContext()
+const { $nav, $slidev } = useSlideContext()
+const { currentSlideRoute } = useNav()
 
-const link = getLink({
-  frontmatter: $frontmatter,
+const currentFrontmatter = computed<Record<string, unknown>>(
+  () => currentSlideRoute.value.meta?.slide?.frontmatter ?? {},
+)
+
+const link = computed(() => getLink({
+  frontmatter: currentFrontmatter.value,
   slidevConfigs: $slidev?.configs as Record<string, unknown> | undefined,
-})
+}))
 
-const { palette: currentPalette } = useActiveThemePalette(() => $frontmatter.color)
+const { palette: currentPalette } = useActiveThemePalette({
+  slidevConfigs: $slidev?.configs as Record<string, unknown> | undefined,
+  slideValue: () => currentFrontmatter.value.color,
+})
 
 watchEffect(() => {
   if (typeof document === 'undefined')

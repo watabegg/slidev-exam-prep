@@ -7,18 +7,16 @@ import {
   type ThemeColorKey,
   type ThemePalette,
 } from './colors'
+import { getWatabeggThemeConfig } from './themeConfig'
 
 function normalizeColor(value: unknown): ThemeColorKey | undefined {
-  if (value === undefined)
-    return undefined
+  if (value === undefined) return undefined
 
-  if (value === null)
-    return defaultThemeColor
+  if (value === null) return defaultThemeColor
 
   if (typeof value === 'string') {
     const trimmed = value.trim()
-    if (!trimmed)
-      return defaultThemeColor
+    if (!trimmed) return defaultThemeColor
 
     return resolveThemeColor(trimmed)
   }
@@ -26,8 +24,21 @@ function normalizeColor(value: unknown): ThemeColorKey | undefined {
   return defaultThemeColor
 }
 
-export function useActiveThemePalette(source: () => unknown) {
-  const colorKey = computed<ThemeColorKey>(() => normalizeColor(source()) ?? defaultThemeColor)
+export function useActiveThemePalette({
+  slidevConfigs,
+  slideValue,
+}: {
+  slidevConfigs?: Record<string, unknown>
+  slideValue: () => unknown
+}) {
+  const colorKey = computed<ThemeColorKey>(() => {
+    const frontmatterColor = normalizeColor(slideValue())
+    if (frontmatterColor !== undefined) return frontmatterColor
+
+    const themeConfigColor = normalizeColor(getWatabeggThemeConfig(slidevConfigs).color)
+    return themeConfigColor ?? defaultThemeColor
+  })
+
   const palette = computed<ThemePalette>(() => getThemePalette(colorKey.value))
 
   return { palette, colorKey }

@@ -5,7 +5,7 @@
 English README (Japanese version: see `README.ja.md`).
 
 ## Overview
-Education-focused Slidev theme for exam prep & classroom lessons, optimized for Japanese typography, high readability, structured question hierarchies, and keyboard-centric navigation. Originally built for personal teaching use.
+A personal Slidev theme for watabegg, tuned for Japanese typography, structured content, and keyboard-first navigation.
 
 ## Features
 - Minimal design specialized for teaching
@@ -35,16 +35,21 @@ theme: ./
 
 ## Frontmatter Example
 ```yaml
+themeConfig:
+  watabegg:
+    color: green
+    link: 'https://example.com'
+
 title: Theme Demo
 subtitle: Subtitle
 author: Instructor Name
 date: '2025/08/03'
-color: green # red | yellow | green | blue | purple
-link: 'https://example.com' # optional footer link
+color: blue # optional slide-level override
+link: 'https://example.com/slide' # optional slide-level override
 transition: fade
 ```
 
-If `color` is omitted, the default `green` palette is used.
+`themeConfig.watabegg.color` and `themeConfig.watabegg.link` define deck-level defaults. Slide-level `color` and `link` override them when present.
 
 Below: `color: blue` example.
 

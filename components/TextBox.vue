@@ -88,22 +88,22 @@ const computedClasses = computed(() => {
 
 /* Text color variants */
 .text-blue {
-  color: #3b82f6 !important;
+  color: #3b82f6;
 }
 
 .text-green {
-  color: #10b981 !important;
+  color: #10b981;
 }
 
 .text-red {
-  color: #ef4444 !important;
+  color: #ef4444;
 }
 
 .text-purple {
-  color: #8b5cf6 !important;
+  color: #8b5cf6;
 }
 
 .text-orange {
-  color: #f97316 !important;
+  color: #f97316;
 }
 </style>

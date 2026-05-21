@@ -11,7 +11,15 @@
       {{ $frontmatter.author }}
     </div>
     <div class="wave">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 700" width="100%" height="100%" preserveAspectRatio="none">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 1280 700"
+        width="100%"
+        height="100%"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+        focusable="false"
+      >
         <defs>
           <linearGradient id="wave-1754178473929" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="700" y2="700" gradientTransform="scale(1.83, 1)">
             <stop offset="0%" :stop-color="currentPalette.gradientStart"/>
@@ -30,9 +38,12 @@ import { useSlideContext } from '@slidev/client'
 
 import { useActiveThemePalette } from '../utils/useThemePalette'
 
-const { $frontmatter } = useSlideContext()
+const { $frontmatter, $slidev } = useSlideContext()
 
-const { palette: currentPalette } = useActiveThemePalette(() => $frontmatter.color)
+const { palette: currentPalette } = useActiveThemePalette({
+  slidevConfigs: $slidev?.configs as Record<string, unknown> | undefined,
+  slideValue: () => $frontmatter.color,
+})
 
 const cssVars = computed(() => ({
   '--slidev-theme-primary': currentPalette.value.primary,

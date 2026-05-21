@@ -4,7 +4,7 @@
   "type": "module",
   "packageManager": "pnpm@11.1.3",
   "author": "watabegg",
-  "description": "Slidev theme for educational purposes, especially teaching.",
+  "description": "A personal Slidev theme for watabegg.",
   "license": "MIT",
   "homepage": "https://github.com/watabegg/slidev-theme-watabegg#readme",
   "bugs": {
@@ -13,9 +13,8 @@
   "keywords": [
     "slidev-theme",
     "slidev",
-    "education",
-    "exam",
-    "teaching"
+    "watabegg",
+    "personal-theme"
   ],
   "engines": {
     "node": ">=20.12.0",
@@ -40,7 +39,11 @@
     "build": "slidev build example.md",
     "dev": "slidev example.md",
     "dev:polling": "CHOKIDAR_USEPOLLING=1 slidev example.md",
-    "check": "pnpm build && npm pack --dry-run",
+    "typecheck": "vue-tsc --noEmit -p tsconfig.json",
+    "lint": "biome lint .",
+    "format": "biome format --write .",
+    "format:check": "biome format .",
+    "check": "pnpm typecheck && pnpm lint && pnpm format:check && pnpm build && pnpm pack --dry-run",
     "audit:prod": "pnpm audit --prod --audit-level=high",
     "export": "slidev export example.md",
     "screenshot": "slidev export example.md --format png"
@@ -51,11 +54,14 @@
     "marked": "^18.0.4"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.4.15",
     "@slidev/cli": "^52.15.2",
     "@slidev/client": "^52.15.2",
     "bumpp": "^11.1.0",
     "playwright-chromium": "^1.60.0",
-    "vue": "^3.5.34"
+    "typescript": "^6.0.3",
+    "vue": "^3.5.34",
+    "vue-tsc": "^3.3.1"
   },
   "//": "Learn more: https://sli.dev/guide/write-theme.html",
   "slidev": {

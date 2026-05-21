@@ -32,7 +32,9 @@ import { useSlideContext } from '@slidev/client'
 
 const { $frontmatter } = useSlideContext()
 
-const imageSrc = computed(() => $frontmatter.image)
+const imageSrc = computed(() => typeof $frontmatter.image === 'string'
+  ? $frontmatter.image
+  : '')
 
 const wrapperRef = ref<HTMLElement | null>(null)
 const scrollerRef = ref<HTMLElement | null>(null)

@@ -4,8 +4,10 @@ title: Theme Demo
 subtitle: slidev-theme-watabeggの紹介
 author: watabegg
 date: '2025/08/03'
-link: 'https://example.com'
-color: blue
+themeConfig:
+  watabegg:
+    color: blue
+    link: 'https://example.com'
 transition: fade
 ---
 
@@ -17,7 +19,8 @@ transition: fade
 - 入れ子リスト
   - 第二階層
   - もう一つ
-- テーマカラーは frontmatter の `color` で `red | yellow | green | blue | purple` から選択
+- テーマカラーは `themeConfig.watabegg.color` で deck 全体に設定可能
+- 各スライドの frontmatter `color` で個別上書きも可能
 
 ```ts
 function hello(name: string) {
@@ -30,6 +33,7 @@ function hello(name: string) {
 ---
 layout: two-cols
 title: 2カラムレイアウト
+color: green
 ---
 
 ::left::

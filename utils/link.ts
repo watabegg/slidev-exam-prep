@@ -1,4 +1,5 @@
 import { toSafeUrl } from './safeUrl'
+import { getWatabeggThemeConfig } from './themeConfig'
 
 const getLink = ({
   frontmatter,
@@ -8,10 +9,12 @@ const getLink = ({
   slidevConfigs: Record<string, unknown> | undefined
 }) => {
   const frontmatterLink = toSafeUrl(frontmatter.link)
-  if (frontmatterLink)
-    return frontmatterLink
+  if (frontmatterLink) return frontmatterLink
 
-  return toSafeUrl(slidevConfigs?.['link'])
+  const themeConfigLink = toSafeUrl(getWatabeggThemeConfig(slidevConfigs).link)
+  if (themeConfigLink) return themeConfigLink
+
+  return toSafeUrl(slidevConfigs?.link)
 }
 
 export default getLink

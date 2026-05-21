@@ -37,11 +37,20 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Type check
+        run: pnpm typecheck
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Check formatting
+        run: pnpm format:check
+
       - name: Build
         run: pnpm build
 
       - name: Verify package contents
-        run: npm pack --dry-run
+        run: pnpm pack --dry-run
 
       - name: Audit production dependencies
         run: pnpm audit --prod --audit-level=high

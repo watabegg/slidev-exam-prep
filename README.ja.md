@@ -2,7 +2,7 @@
 
 [![NPM version](https://img.shields.io/npm/v/slidev-theme-watabegg?color=3AB9D4&label=)](https://www.npmjs.com/package/slidev-theme-watabegg)
 
-教育現場（集団授業・試験対策）向けに視認性と操作性を重視した Slidev テーマです。普通に自分用に開発しました。
+watabegg 向けに作っている個人用 Slidev テーマです。日本語表示、構造化されたコンテンツ、キーボード操作を重視しています。
 
 ## 特徴
 - 教育特化のミニマルデザイン
@@ -31,16 +31,21 @@ theme: ./
 
 ## フロントマター例
 ```yaml
+themeConfig:
+  watabegg:
+    color: green
+    link: 'https://example.com'
+
 title: Theme Demo
 subtitle: サブタイトル
 author: 講師名
 date: '2025/08/03'
-color: green # red | yellow | green | blue | purple
-link: 'https://example.com' # フッターリンク（省略可）
+color: blue # スライド単位の上書き（省略可）
+link: 'https://example.com/slide' # スライド単位の上書き（省略可）
 transition: fade
 ```
 
-`color` を省略するとデフォルトの `green` が適用されます。
+`themeConfig.watabegg.color` と `themeConfig.watabegg.link` で deck 全体の既定値を設定できます。スライド側に `color` や `link` があればそちらが優先されます。
 
 下図は`blue`指定の例。
 

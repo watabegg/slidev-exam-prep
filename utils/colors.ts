@@ -43,8 +43,7 @@ export const themePalettes: Record<ThemeColorKey, ThemePalette> = {
 }
 
 export function resolveThemeColor(rawValue: unknown): ThemeColorKey {
-  if (typeof rawValue !== 'string')
-    return defaultThemeColor
+  if (typeof rawValue !== 'string') return defaultThemeColor
 
   const normalized = rawValue.trim().toLowerCase() as ThemeColorKey
   return normalized in themePalettes ? normalized : defaultThemeColor
@@ -54,4 +53,3 @@ export function getThemePalette(rawValue: unknown): ThemePalette {
   const key = resolveThemeColor(rawValue)
   return themePalettes[key]
 }
-
