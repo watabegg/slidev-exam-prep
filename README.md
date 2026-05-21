@@ -123,6 +123,7 @@ Nested questions/answers with per-level styles and Markdown rendering.
 Counter types: `decimal | hiragana | katakana | kanji | upperalpha | loweralpha | none`  
 Decorators: `circle | square | paren | dot | q | big-q | none`  
 If an item includes a `label`, it overrides the computed label.
+Raw HTML inside `text` is escaped. Markdown links only allow safe protocols (`http`, `https`, `mailto`, `tel`) plus relative URLs.
 
 ![QuestionList Example](https://raw.githubusercontent.com/watabegg/slidev-theme-watabegg/refs/heads/main/example/3.png)
 
@@ -158,10 +159,13 @@ Props: `formula` (required), `block` (default `false`), `tag` (auto `div`/`span`
 ```bash
 pnpm install
 pnpm dev
+pnpm dev:polling
 pnpm build
 pnpm export
 pnpm screenshot
 ```
+
+If `pnpm dev` hits Linux file watcher limits (`ENOSPC`), use `pnpm dev:polling`.
 
 ## FAQ
 **Q. Do I need to configure fonts manually?**  

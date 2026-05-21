@@ -1,14 +1,12 @@
-import { computed, ref, watchEffect } from 'vue'
+import { computed } from 'vue'
 
 import {
   defaultThemeColor,
+  getThemePalette,
   resolveThemeColor,
-  themePalettes,
   type ThemeColorKey,
   type ThemePalette,
 } from './colors'
-
-const activeColorKey = ref<ThemeColorKey>(defaultThemeColor)
 
 function normalizeColor(value: unknown): ThemeColorKey | undefined {
   if (value === undefined)
@@ -29,21 +27,8 @@ function normalizeColor(value: unknown): ThemeColorKey | undefined {
 }
 
 export function useActiveThemePalette(source: () => unknown) {
-  watchEffect(() => {
-    const normalized = normalizeColor(source())
-    if (normalized !== undefined)
-      activeColorKey.value = normalized
-  })
+  const colorKey = computed<ThemeColorKey>(() => normalizeColor(source()) ?? defaultThemeColor)
+  const palette = computed<ThemePalette>(() => getThemePalette(colorKey.value))
 
-  const palette = computed<ThemePalette>(() => themePalettes[activeColorKey.value])
-
-  return {
-    palette,
-    colorKey: computed(() => activeColorKey.value),
-  }
+  return { palette, colorKey }
 }
-
-export function getActiveThemePalette(): ThemePalette {
-  return themePalettes[activeColorKey.value]
-}
-

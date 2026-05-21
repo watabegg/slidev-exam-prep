@@ -118,7 +118,7 @@ imageScroll:
 ```
 カウンター種別: `decimal | hiragana | katakana | kanji | upperalpha | loweralpha | none`  
 デコレータ: `circle | square | paren | dot | q | big-q | none`  
-アイテム内 `label` があればそれを優先表示。
+アイテム内 `label` があればそれを優先表示。`text` 内の生 HTML はエスケープされ、Markdown リンクも `http` / `https` / `mailto` / `tel` と相対 URL のみ許可されます。
 
 ![QuestionList 例](https://raw.githubusercontent.com/watabegg/slidev-theme-watabegg/refs/heads/main/example/3.png)
 
@@ -154,10 +154,13 @@ Props: `formula`(必須), `block`(既定 false), `tag`(省略時 `div`/`span` �
 ```bash
 pnpm install
 pnpm dev
+pnpm dev:polling
 pnpm build
 pnpm export
 pnpm screenshot
 ```
+
+Linux で `pnpm dev` が file watcher 上限 (`ENOSPC`) に当たる場合は `pnpm dev:polling` を使用してください。
 
 ## FAQ
 **Q. フォント設定は必要？** → いいえ、テーマ内で Google Fonts を読み込みます。
